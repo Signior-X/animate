@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example</title>
+
+  <style>
+    .images {
+      width: 12vw;
+      height: 12vw;
+      position: absolute;
+      transition: all 1s;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main"></div>
+
+  <script>
+    toAdd = '';
+    for (let i = 1; i <= 7; i++) {
+      var randomTop = Math.random() * window.innerHeight * 0.8;
+      var randomLeft = Math.random() * window.innerWidth * 0.88;
+      toAdd += '<img class="images" style="top: ' + randomTop + 'px; left: ' + randomLeft + 'px;" src="'+i+'.jpeg" alt="image">';
+    }
+    document.getElementById("main").innerHTML = toAdd;
+
+    // let promiseA = new Promise((resolve, reject) => {
+    //   let wait = setTimeout(() => {
+    //     resolve('Promise A won');
+    //   }, 3000);
+    // });
+
+    const sleep = ms => {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
+    async function doAnimation() {
+      for (let i = 0; i < 1000; i++) {
+        await sleep(1000);
+        console.log("now", i);
+        // here add custom positions to all of them
+        var images = document.getElementsByClassName('images');
+        // var randomOpacity = Math.random();
+        for (let j = 0; j < images.length; j++) {
+          console.log("now changing", i, j);
+          var randomWidth = (Math.random() * 10 + 3);
+          var randomTop = Math.random() * window.innerHeight * 0.8;
+          var randomLeft = Math.random() * window.innerWidth * 0.88;
+          images[j].style.top = randomTop + "px";
+          images[j].style.left = randomLeft + "px";
+          images[j].style.width = randomWidth + "vw";
+          images[j].style.height = randomWidth + "vw";
+          // images[j].style.opacity = randomOpacity;
+
+        }
+      }
+    }
+
+    doAnimation();
+
+  </script>
+</body>
+
+</html>
